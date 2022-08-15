@@ -32,7 +32,6 @@ router.put("/add-song", jwtAuth, async (req, res) => {
 });
 router.delete("/remove-song", jwtAuth, async (req, res) => {
   try {
-    console.log(req.body);
     const deleteSong = await playlistLogic.removeSong(req.body, req._id);
     res.status(200).send(deleteSong.message);
   } catch (err) {
