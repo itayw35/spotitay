@@ -11,7 +11,6 @@ async function makeplaylist(playlist, userId) {
     throw { code: 400, message: "playlist already exists" };
   }
   playlist.userId = userId;
-  console.log(playlist);
   const myNewPlayList = await playlistController.create(playlist);
   return { code: 200, message: `${myNewPlayList.name} was created` };
 }
