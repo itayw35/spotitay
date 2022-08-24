@@ -7,10 +7,7 @@ router.get("/:query", jwtAuth, async (req, res, next) => {
   try {
     const inp = req.params.query;
     const searchResult = await searchLogic.searchYT(inp);
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "http://localhost:3000, https://spotitay.netlify.app"
-    );
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Headers",
       " Origin, X-Requested-With, Content-Type, Accept"
