@@ -1,5 +1,5 @@
 const playlistController = require("../DL/controllers/playlistController");
-
+const userController = require("../DL/controllers/userController");
 async function makeplaylist(playlist, userId) {
   if (!playlist) {
     throw { code: 400, message: "missing details" };
@@ -71,10 +71,15 @@ async function removePlaylist(playlist, userId) {
   );
   return { code: 200, message: "playlist was removed" };
 }
+async function sharePlaylist(playlist, userId, email) {
+  const friend = await userController.read({ email: email }, "userId");
+  return { message: friend };
+}
 module.exports = {
   makeplaylist,
   addSong,
   getPlayList,
   removeSong,
   removePlaylist,
+  sharePlaylist,
 };

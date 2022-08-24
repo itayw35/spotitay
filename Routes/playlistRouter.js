@@ -49,4 +49,16 @@ router.put("/remove-playlist", jwtAuth, async (req, res) => {
     res.send({ code: err.code, message: err.message });
   }
 });
+router.post("/share-playlist", jwtAuth, async (req, res) => {
+  try {
+    const sharedPlaylist = await playlistLogic.sharePlaylist(
+      req.body.playlist,
+      req._id,
+      req.body.email
+    );
+    res.status(200).send(sharedPlaylist.message);
+  } catch (err) {
+    res.status(err.code).send(err.message);
+  }
+});
 module.exports = router;
