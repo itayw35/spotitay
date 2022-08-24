@@ -7,6 +7,7 @@ async function makeplaylist(playlist, userId) {
   const newPlayList = await playlistController.read({
     name: playlist.name,
     userId: userId,
+    isActive: true,
   });
   if (newPlayList.length > 0) {
     throw { code: 400, message: "playlist already exists" };
