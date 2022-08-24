@@ -7,7 +7,9 @@ router.get("/:query", jwtAuth, async (req, res) => {
   try {
     const inp = req.params.query;
     const searchResult = await searchLogic.searchYT(inp);
-    console.log(searchResult);
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
     res.status(200).send(searchResult);
   } catch (err) {
     console.log(err);
