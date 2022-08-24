@@ -38,4 +38,15 @@ router.delete("/remove-song", jwtAuth, async (req, res) => {
     res.send({ code: err.code, message: err.message });
   }
 });
+router.put("/remove-playlist", jwtAuth, async (req, res) => {
+  try {
+    const deletePlaylist = await playlistLogic.removePlaylist(
+      req.body,
+      req._id
+    );
+    res.status(200).send(deletePlaylist.message);
+  } catch (err) {
+    res.send({ code: err.code, message: err.message });
+  }
+});
 module.exports = router;

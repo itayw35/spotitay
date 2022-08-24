@@ -17,8 +17,12 @@ async function makeplaylist(playlist, userId) {
 }
 async function getPlayList(playlist, userId) {
   const newPlayList = playlist
-    ? await playlistController.read({ name: playlist, userId: userId })
-    : await playlistController.read({ userId: userId });
+    ? await playlistController.read({
+        name: playlist,
+        userId: userId,
+        isActive: true,
+      })
+    : await playlistController.read({ userId: userId, isActive: true });
   if (newPlayList.length < 1) {
     throw { code: 400, message: "playlist does not exist" };
   }
@@ -59,4 +63,17 @@ async function removeSong(data, userId) {
   );
   return { code: 200, message: "the song was deleted" };
 }
-module.exports = { makeplaylist, addSong, getPlayList, removeSong };
+async function removePlaylist(playlist, userId) {
+  playlistController.update(
+    { name: playlist.name, userId: userId },
+    { isActive: false }
+  );
+  return { code: 200, message: "playlist was removed" };
+}
+module.exports = {
+  makeplaylist,
+  addSong,
+  getPlayList,
+  removeSong,
+  removePlaylist,
+};
