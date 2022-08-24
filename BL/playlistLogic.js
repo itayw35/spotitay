@@ -72,7 +72,7 @@ async function removePlaylist(playlist, userId) {
   return { code: 200, message: "playlist was removed" };
 }
 async function sharePlaylist(playlist, userId, email) {
-  const friend = await userController.read({ email: email }, "_id");
+  const friend = await userController.read({ email: email }, "+_id");
   return { message: friend };
 }
 module.exports = {
