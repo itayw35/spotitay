@@ -79,7 +79,7 @@ async function sharePlaylist(playlist, userId, email) {
   playlistController.create({
     name: playlist,
     userId: friend[0],
-    songs: sharedPlaylist.songs,
+    songs: sharedPlaylist[0].songs,
   });
   return { code: 200, message: "shared playlist" };
 }
