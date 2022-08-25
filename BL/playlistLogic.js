@@ -72,7 +72,7 @@ async function sharePlaylist(playlist, userId, email) {
   const friend = await userController
     .read({ email: email })
     .project({ _id: 1 });
-  console.log(friend);
+  console.log("f " + friend);
   return { message: friend };
 }
 module.exports = {
