@@ -17,7 +17,9 @@ const update = async function (query, data) {
   return res;
 };
 const del = async function (query) {
-  const res = await updateMany(query, { isActive: false });
+  const res = await playlistModel.playlistModel.updateMany(query, {
+    isActive: false,
+  });
   return res;
 };
 
