@@ -32,6 +32,8 @@ async function getPlayList(playlist, userId) {
 async function addSong(data, userId) {
   const { name, id } = data.song;
   if (!name || !id) throw { code: 400, message: "missing details" };
+  console.log(data);
+  console.log(userId);
   const newPlayList = await playlistController.read({
     name: data.playlist,
     userId: userId,
@@ -65,7 +67,7 @@ async function removeSong(data, userId) {
   return { code: 200, message: "the song was deleted" };
 }
 async function removePlaylist(playlist, userId) {
-  playlistController.update(
+  playlistController.del(
     { name: playlist.name, userId: userId },
     { isActive: false }
   );
