@@ -70,7 +70,18 @@ async function removePlaylist(playlist, userId) {
 }
 async function sharePlaylist(playlist, userId, email) {
   const friend = await userController.read({ email: email }, "_id");
-  return { message: friend };
+  if (friend.length < 1) throw { code: 400, message: "user does not exist" };
+  const sharedPlaylist = await playlistController.read({
+    name: playlist,
+    userId: userId,
+    isActive: true,
+  });
+  playlistController.create({
+    name: playlist,
+    userId: friend[0],
+    songs: sharedPlaylist.songs,
+  });
+  return { code: 200, message: "shared playlist" };
 }
 module.exports = {
   makeplaylist,
