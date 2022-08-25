@@ -32,8 +32,6 @@ async function getPlayList(playlist, userId) {
 async function addSong(data, userId) {
   const { name, id } = data.song;
   if (!name || !id) throw { code: 400, message: "missing details" };
-  console.log(data);
-  console.log(userId);
   const newPlayList = await playlistController.read({
     name: data.playlist,
     userId: userId,
@@ -52,6 +50,7 @@ async function addSong(data, userId) {
   };
 }
 async function removeSong(data, userId) {
+  console.log(data);
   const { playlist, song } = data;
   const updatedPlaylist = await playlistController.read({
     name: playlist,
