@@ -49,13 +49,19 @@ router.put("/remove-playlist", jwtAuth, async (req, res) => {
     res.send({ code: err.code, message: err.message });
   }
 });
-router.post("/share-playlist", jwtAuth, async (req, res) => {
+router.post("/share-playlist", jwtAuth, async (req, res, next) => {
   try {
     const sharedPlaylist = await playlistLogic.sharePlaylist(
       req.body.playlist,
       req._id,
       req.body.email
     );
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      " Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
     res.status(200).send(sharedPlaylist.message);
   } catch (err) {
     res.status(err.code).send(err.message);
