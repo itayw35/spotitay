@@ -50,7 +50,6 @@ async function addSong(data, userId) {
   };
 }
 async function removeSong(data, userId) {
-  console.log(data);
   const { playlist, song } = data;
   const updatedPlaylist = await playlistController.read({
     name: playlist,
@@ -66,10 +65,7 @@ async function removeSong(data, userId) {
   return { code: 200, message: "the song was deleted" };
 }
 async function removePlaylist(playlist, userId) {
-  playlistController.del(
-    { name: playlist.name, userId: userId },
-    { isActive: false }
-  );
+  playlistController.del({ name: playlist.name, userId: userId });
   return { code: 200, message: "playlist was removed" };
 }
 async function sharePlaylist(playlist, userId, email) {
