@@ -56,12 +56,6 @@ router.post("/share-playlist", jwtAuth, async (req, res, next) => {
       req._id,
       req.body.email
     );
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      " Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
     res.status(200).send(sharedPlaylist.message);
   } catch (err) {
     res.status(err.code).send(err.message);
