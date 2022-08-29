@@ -15,6 +15,7 @@ async function searchYT(inp) {
   const res = await axios.request(options).catch(function (error) {
     console.error(error);
   });
+  console.log(res.data.results);
   return res.data.results;
 }
 module.exports = { searchYT };
